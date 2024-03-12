@@ -1,0 +1,5 @@
+node_modules
+media/input/*.mp4
+media/output/*.mp4
+media/done/*.mp4
+todo.txt
