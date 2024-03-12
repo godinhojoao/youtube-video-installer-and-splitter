@@ -27,6 +27,7 @@ class VideoHandler {
     const fileSizeInBytes = video.stat.size
     const fileSizeInMB = fileSizeInBytes / ONE_MEGABYTE_IN_BYTES
     if (fileSizeInMB <= maxSizeInMB) {
+      await FileHandler.moveFileToAnotherFolder(video.filePath, outputVideosFolder);
       return console.log(`Video ${video.filePath} is already within the specified size limit.`)
     }
 
@@ -55,6 +56,7 @@ class VideoHandler {
         return await encodeNextVideoPart();
       }
       console.log(`Finished splitting video ${video.filePath} with duration ${(durationOfEntireFileInSeconds / 60).toFixed(2)} minutes into parts.`)
+      await FileHandler.deleteFile(video.filePath);
     }
     await encodeNextVideoPart();
   }
@@ -62,7 +64,7 @@ class VideoHandler {
   static async splitVideoBySizeBatch({ videos, maxSizeInMB }) {
     const splitVideosPromises = videos.map(video => VideoHandler.splitVideoBySize({ video, maxSizeInMB }))
     await Promise.all(splitVideosPromises)
-    console.log(`Finished to split all ${videos.length} videos by size of ${maxSizeInMB}mb!\n`)
+    console.log(`Finished to split ${videos.length} video(s) by size of ${maxSizeInMB}mb!\n`)
   }
 
   static spawnFfmpegProcess(args) {

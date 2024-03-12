@@ -18,15 +18,18 @@ class FileHandler {
     return allFilesFromFolder && allFilesFromFolder[0];
   }
 
-  static async moveAllFilesToAnotherFolder(folderPath, destinationFolder) {
-    const files = await fs.readdir(folderPath);
-    await Promise.all(files.map(async (file) => {
-      const filePath = path.join(folderPath, file);
-      const destinationPath = path.join(destinationFolder, file);
-      await fs.rename(filePath, destinationPath);
-    }));
+  static async moveFileToAnotherFolder(filePath, destinationFolder) {
+    const fileName = path.basename(filePath);
+    const destinationPath = path.join(destinationFolder, fileName);
+    await fs.rename(filePath, destinationPath);
+  }
 
-    console.log(`Files moved from ${folderPath} to ${destinationFolder}`);
+  static async deleteFile(filePath) {
+    try {
+      await fs.unlink(filePath);
+    } catch (error) {
+      console.error(`Error deleting file: ${error}`);
+    }
   }
 }
 

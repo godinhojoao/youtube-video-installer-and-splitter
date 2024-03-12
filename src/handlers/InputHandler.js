@@ -10,7 +10,7 @@ class InputHandler {
   static async handleInput(message) {
     rl.question(message, (input) => {
       input = input.trim()
-      if (input.toLowerCase() === 'done') {
+      if (input.toLowerCase() === 'ok') {
         rl.close()
       } else {
         answers.push(input)
@@ -27,7 +27,7 @@ class InputHandler {
   }
 
   static async getYoutubeVideoUrls() {
-    const message = 'Enter YouTube video URL (or type "done" to finish):\n'
+    const message = 'Enter YouTube video URL (or type "ok" to finish):\n'
     const youtubeVideoUrls = await this.handleInput(message);
     const validYoutubeVideoUrls = youtubeVideoUrls.filter(url => isValidYoutubeLink(url))
     return validYoutubeVideoUrls
