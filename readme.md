@@ -4,7 +4,11 @@
 
 ## How to run locally
 
+## Install
+
 - `nvm i 20.11.1`
 - `nvm use`
 - `npm i`
+- Create these folders 'src/media', 'src/media/input' and 'src/media/output'
+  - linux and mac: `npm run create-media-folders`
 - `npm run dev`

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "src/app.js",
   "scripts": {
+    "create-media-folders": "mkdir src/media && mkdir src/media/input && mkdir src/media/output",
     "dev": "node src/app.js"
   },
   "keywords": [],
